@@ -18,7 +18,7 @@ return [
 
     // File Patterns to search for.
     'patterns'=> [
-        '*.php',
+        '*symlink.php',
         '*.js',
     ],
 

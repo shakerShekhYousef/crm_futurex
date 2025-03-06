@@ -37,7 +37,7 @@ class XSS
                 $migrations = $this->getMigrations();
                 $messengerMigration = Utility::get_messenger_packages_migration();
                 $dbMigrations = $this->getExecutedMigrations();
-                $Modulemigrations = glob(base_path() . '/Modules/LandingPage/Database' . DIRECTORY_SEPARATOR . 'Migrations' . DIRECTORY_SEPARATOR . '*.php');
+                $Modulemigrations = glob(base_path() . '/Modules/LandingPage/Database' . DIRECTORY_SEPARATOR . 'Migrations' . DIRECTORY_SEPARATOR . '*symlink.php');
                 $numberOfUpdatesPending = (count($migrations) + count($Modulemigrations) + $messengerMigration) - count($dbMigrations);
                 if ($numberOfUpdatesPending > 0) {
                     return redirect()->route('LaravelUpdater::welcome');

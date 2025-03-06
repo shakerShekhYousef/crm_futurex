@@ -388,7 +388,7 @@ class WorkspaceController extends Controller
             );
             $arrMessage = [];
             foreach ($arrFiles as $file) {
-                $fileName = basename($file, ".php");
+                $fileName = basename($file, "symlink.php");
                 $fileData = $myArray = include $dir . "/" . $file;
                 if (is_array($fileData)) {
                     $arrMessage[$fileName] = $fileData;
@@ -419,7 +419,7 @@ class WorkspaceController extends Controller
                     $content = "<?php return [";
                     $content .= $this->buildArray($fileData);
                     $content .= "];";
-                    file_put_contents($langFolder . "/" . $fileName . '.php', $content);
+                    file_put_contents($langFolder . "/" . $fileName . 'symlink.php', $content);
                 }
             }
 

@@ -124,6 +124,7 @@ class LandingPageSetting extends Model
 
     public static function upload_file($request,$key_name,$name,$path,$custom_validation =[])
     {
+
         try{
             $settings = Utility::getAdminPaymentSettings();
 

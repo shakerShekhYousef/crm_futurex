@@ -480,10 +480,10 @@ class Utility
     // public static function get_messenger_packages_migration()
     // {
     //     $totalMigration = 0;
-    //     $messengerPath  = glob(base_path() . '/vendor/munafio/chatify/database/migrations' . DIRECTORY_SEPARATOR . '*.php');
+    //     $messengerPath  = glob(base_path() . '/vendor/munafio/chatify/database/migrations' . DIRECTORY_SEPARATOR . '*symlink.php');
     //     if(!empty($messengerPath))
     //     {
-    //         $messengerMigration = str_replace('.php', '', $messengerPath);
+    //         $messengerMigration = str_replace('symlink.php', '', $messengerPath);
     //         $totalMigration     = count($messengerMigration);
     //     }
 
@@ -492,9 +492,9 @@ class Utility
     public static function get_messenger_packages_migration()
     {
         $totalMigration = 0;
-        $messengerPath = glob(base_path() . '/vendor/munafio/chatify/database/migrations' . DIRECTORY_SEPARATOR . '*.php');
+        $messengerPath = glob(base_path() . '/vendor/munafio/chatify/database/migrations' . DIRECTORY_SEPARATOR . '*symlink.php');
         if (!empty($messengerPath)) {
-            $messengerMigration = str_replace('.php', '', $messengerPath);
+            $messengerMigration = str_replace('symlink.php', '', $messengerPath);
             $totalMigration = count($messengerMigration);
         }
 

@@ -25,4 +25,13 @@ class VerifyCsrfToken extends Middleware
 
 
     ];
+
+    protected function addCookieToResponse($request, $response)
+{
+    if ($request->ajax() || $request->wantsJson()) {
+        return $response;
+    }
+
+    return parent::addCookieToResponse($request, $response);
+}
 }

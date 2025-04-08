@@ -190,11 +190,11 @@
                     <h6 class="mb-0">{{ $settings['home_description'] }}</h6>
                     <div class="d-flex gap-3 mt-4 banner-btn">
                         @if ($settings['home_live_demo_link'])
-                            <a href="{{ $settings['home_live_demo_link'] }}" class="btn btn-outline-dark">Live Demo
+                            <a href="#" class="btn btn-custom-landing">Live Demo
                                 <i data-feather="play-circle" class="ms-2"></i></a>
                         @endif
                         @if ($settings['home_buy_now_link'])
-                            <a href="{{ $settings['home_buy_now_link'] }}" class="btn btn-outline-dark">Buy Now <i
+                            <a href="#" class="btn btn-custom-landing">Buy Now <i
                                     data-feather="lock" class="ms-2"></i></a>
                         @endif
                     </div>
@@ -207,58 +207,13 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row g-0 gy-2 mt-4 align-items-center">
-                <div class="col-xxl-3">
-                    <p class="mb-0">Trusted by <b class="fw-bold">{{ $settings['home_trusted_by'] }}</b></p>
-                </div>
-                {{-- <div class="col-xxl-9">
-                        <div class="row gy-3 row-cols-9">
-                            <div class="col-auto">
-                                <img src="{{ $logo.'/'. $settings['home_logo'] }}" alt="" class="img-fluid"
-                                    style="width: 130px;">
-                            </div>
-                            <div class="col-auto">
-                                <img src="{{ $logo.'/'. $settings['home_logo'] }}" alt="" class="img-fluid"
-                                    style="width: 130px;">
-                            </div>
-                            <div class="col-auto">
-                                <img src="{{ $logo.'/'. $settings['home_logo'] }}" alt="" class="img-fluid"
-                                    style="width: 130px;">
-                            </div>
-                            <div class="col-auto">
-                                <img src="{{ $logo.'/'. $settings['home_logo'] }}" alt="" class="img-fluid"
-                                    style="width: 130px;">
-                            </div>
-                            <div class="col-auto">
-                                <img src="{{ $logo.'/'. $settings['home_logo'] }}" alt="" class="img-fluid"
-                                    style="width: 130px;">
-                            </div>
-                            <div class="col-auto">
-                                <img src="{{ $logo.'/'. $settings['home_logo'] }}" alt="" class="img-fluid"
-                                    style="width: 130px;">
-                            </div>
-                            <div class="col-auto">
-                                <img src="{{ $logo.'/'. $settings['home_logo'] }}" alt="" class="img-fluid"
-                                    style="width: 130px;">
-                            </div>
-                        </div>
-                    </div> --}}
-                @foreach (explode(',', $settings['home_logo']) as $k => $home_logo)
-                    <div class="col-auto mx-2">
-                        <img src="{{ $logo . '/' . $home_logo }}" alt="" class="img-fluid"
-                            style="width: 130px;">
-                    </div>
-                @endforeach
-            </div>
-        </div>
     </section>
 @endif
 <!-- [ Banner ] start -->
 <!-- [ features ] start -->
 @if ($settings['feature_status'] == 'on')
     <section class="features-section section-gap bg-dark" id="features">
-        <div class="container">
+        <div class="container-features">
             <div class="row gy-3">
                 <div class="col-xxl-4">
                     <span class="d-block mb-2 text-uppercase">{{ $settings['feature_title'] }}</span>
@@ -297,7 +252,7 @@
                 <div class="mt-5">
                     <div class="title text-center mb-4">
                         <span class="d-block mb-2 text-uppercase">{{ $settings['feature_title'] }}</span>
-                        <h2 class="mb-4">{!! $settings['highlight_feature_heading'] !!}</h2>
+                        <h2 class="mb-4" >{!! $settings['highlight_feature_heading'] !!}</h2>
                         <p>{!! $settings['highlight_feature_description'] !!}</p>
                     </div>
                     <div class="features-preview">
@@ -327,7 +282,7 @@
                                     </h2>
                                 </div>
                                 <p class="mb-3">{!! $value['other_featured_description'] !!}</p>
-                                <a href="{{ $value['other_feature_buy_now_link'] }}"
+                                <a href="#"
                                     class="btn btn-primary rounded-pill d-inline-flex align-items-center">Buy Now <i
                                         data-feather="lock" class="ms-2"></i></a>
                             </div>
@@ -354,7 +309,7 @@
                                     </h2>
                                 </div>
                                 <p class="mb-3">{!! $value['other_featured_description'] !!}</p>
-                                <a href="{{ $value['other_feature_buy_now_link'] }}"
+                                <a href="#"
                                     class="btn btn-primary rounded-pill d-inline-flex align-items-center">Buy Now <i
                                         data-feather="lock" class="ms-2"></i></a>
                             </div>
@@ -370,12 +325,12 @@
 <!-- [ element ] start -->
 @if ($settings['discover_status'] == 'on')
     <section class="bg-dark section-gap">
-        <div class="container">
+        <div class="container-discover">
             <div class="row mb-2 justify-content-center">
                 <div class="col-xxl-6">
                     <div class="title text-center mb-4">
                         <span class="d-block mb-2 text-uppercase">DISCOVER</span>
-                        <h2 class="mb-4">{!! $settings['discover_heading'] !!}</h2>
+                        <h2 class="mb-4" >{!! $settings['discover_heading'] !!}</h2>
                         <p>{!! $settings['discover_description'] !!}</p>
                     </div>
                 </div>
@@ -403,13 +358,13 @@
             </div>
             <div class="d-flex flex-column justify-content-center flex-sm-row gap-3 mt-3">
                 @if ($settings['discover_live_demo_link'])
-                    <a href="{{ $settings['discover_live_demo_link'] }}"
+                    <a href="#"
                         class="btn btn-outline-light rounded-pill">Live
                         Demo <i data-feather="play-circle" class="ms-2"></i> </a>
                 @endif
 
                 @if ($settings['discover_buy_now_link'])
-                    <a href="{{ $settings['discover_buy_now_link'] }}" class="btn btn-primary rounded-pill">Buy Now
+                    <a href="#" class="btn btn-primary rounded-pill">Buy Now
                         <i data-feather="lock" class="ms-2"></i> </a>
                 @endif
             </div>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Client;
+use App\Models\Utility;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
@@ -58,6 +60,8 @@ use App\Http\Controllers\NepalsteController;
 use App\Http\Controllers\CinetPayController;
 use App\Http\Controllers\FedapayPaymentController;
 use App\Http\Controllers\PayHerePaymentController;
+use App\Http\Controllers\OpportunityController;
+use App\Http\Controllers\CandidateClientController;
 
 
 /*
@@ -549,7 +553,17 @@ Route::group(['middleware' => ['verified']], function () {
     Route::get('/{slug}/clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit')->middleware(['auth', 'XSS']);
     Route::post('/{slug}/clients/{id}/update', [ClientController::class, 'update'])->name('clients.update')->middleware(['auth', 'XSS']);
     Route::delete('/{slug}/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy')->middleware(['auth', 'XSS']);
-    // User
+    Route::get('/opportunities/download-example/{workspace}', [OpportunityController::class, 'downloadExample'])
+        ->name('opportunities.download.example');
+
+    //opportunities
+    Route::get('/{slug}/opportunities',[OpportunityController::class,'index'])->name('opportunities.index')->middleware(['auth', 'XSS']);
+    Route::post('/{slug}/opportunities/store',[OpportunityController::class,'store'])->name('opportunities.store')->middleware(['auth', 'XSS']);
+    Route::post('/{slug}/opportunities/update',[OpportunityController::class,'update'])->name('opportunities.update')->middleware(['auth', 'XSS']);
+    Route::get('/{slug}/opportunities/{id}',[OpportunityController::class,'show'])->name('opportunities.show')->middleware(['auth', 'XSS']);
+    Route::post('/{slug}/Candidateclients/create',[CandidateClientController::class,'create'])->name('candidateclients.create')->middleware(['auth', 'XSS']);
+    Route::post('/opportunities/upload',[CandidateClientController::class,'uploadExcelFile'])->name('candidateclients.upload')->middleware(['auth', 'XSS']);
+      // User
     Route::get('/usersJson/{id}', [UserController::class, 'getUserJson'])->name('user.email.json')->middleware(['auth', 'XSS']);
     Route::get('/{slug}/searchJson/{search?}', [ProjectController::class, 'getSearchJson'])->name('search.json')->middleware(['auth', 'XSS']);
     Route::get('/userProjectJson/{id}', [UserController::class, 'getProjectUserJson'])->name('user.project.json')->middleware(['auth', 'XSS']);

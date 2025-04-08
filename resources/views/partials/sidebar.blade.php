@@ -47,7 +47,7 @@
         <div class="m-header main-logo">
             <a href="{{ route('home') }}" class="b-brand">
                 <!-- ========   change your logo hear   ============ -->
-                <img src="{{ $logo . $company_logo . '?v=' . time() }}" alt="logo" class="sidebar_logo_size" />
+                <img src="{{ $logo . $company_logo . '?v=' . time() }}" alt="logo" class="sidebar_logo_size"/>
             </a>
         </div>
         <div class="navbar-content">
@@ -55,7 +55,7 @@
                 @if (\Auth::guard('client')->check())
                     <li class="dash-item dash-hasmenu">
                         <a href="{{ route('client.home') }}"
-                            class="dash-link {{ Request::route()->getName() == 'home' || Request::route()->getName() == null || Request::route()->getName() == 'client.home' ? ' active' : '' }}">
+                           class="dash-link {{ Request::route()->getName() == 'home' || Request::route()->getName() == null || Request::route()->getName() == 'client.home' ? ' active' : '' }}">
                             <span class="dash-micon"><i class="ti ti-home"></i></span>
                             <span class="dash-mtext">{{ __('Dashboard') }}</span>
                         </a>
@@ -63,7 +63,7 @@
                 @else
                     <li class="dash-item dash-hasmenu">
                         <a href="{{ route('home') }}"
-                            class="dash-link  {{ Request::route()->getName() == 'home' || Request::route()->getName() == null || Request::route()->getName() == 'client.home' ? ' active' : '' }}">
+                           class="dash-link  {{ Request::route()->getName() == 'home' || Request::route()->getName() == null || Request::route()->getName() == 'client.home' ? ' active' : '' }}">
                             @if (Auth::user()->type == 'admin')
                                 <span class="dash-micon"><i class="ti ti-user"></i></span>
                                 <span class="dash-mtext">{{ __('Company') }}</span>
@@ -88,13 +88,20 @@
                         @if ($currentWorkspace->creater->id == Auth::user()->id)
                             <li class="dash-item dash-hasmenu">
                                 <a href="{{ route('clients.index', $currentWorkspace->slug) }}"
-                                    class="dash-link {{ Request::route()->getName() == 'clients.index' ? ' active' : '' }}">
+                                   class="dash-link {{ Request::route()->getName() == 'clients.index' ? ' active' : '' }}">
                                     <span class="dash-micon"><i class="ti ti-brand-python"></i></span>
                                     <span class="dash-mtext"> {{ __('Clients') }}</span>
                                 </a>
                             </li>
                         @endif
 
+                        <li class="dash-item dash-hasmenu">
+                            <a href="{{ route('opportunities.index', $currentWorkspace->slug) }}"
+                               class="dash-link {{ Request::route()->getName() == 'opportunities.index' ? ' active' : '' }}">
+                                <span class="dash-micon"><i data-feather="list"></i></span>
+                                <span class="dash-mtext"> {{ __('Opportunities') }}</span>
+                            </a>
+                        </li>
                         <li
                             class="dash-item {{ Request::route()->getName() == 'projects.index' || Request::segment(2) == 'projects' ? ' active' : '' }}">
                             <a href="{{ route('projects.index', $currentWorkspace->slug) }}" class="dash-link">
@@ -150,14 +157,14 @@
                                     <li
                                         class="dash-item {{ Request::route()->getName() == 'contracts.index' || Request::route()->getName() == 'contracts.show' ? 'active' : '' }}">
                                         <a class="dash-link"
-                                            href="{{ route('contracts.index', $currentWorkspace->slug) }}">
+                                           href="{{ route('contracts.index', $currentWorkspace->slug) }}">
                                             {{ __('Contracts') }}
                                         </a>
                                     </li>
 
                                     <li class="dash-item ">
                                         <a class="dash-link"
-                                            href="{{ route('contract_type.index', $currentWorkspace->slug) }}">
+                                           href="{{ route('contract_type.index', $currentWorkspace->slug) }}">
                                             {{ __('Contract Type') }}
                                         </a>
                                     </li>
@@ -166,7 +173,8 @@
                         @endif
 
                         <li class="dash-item {{ Request::route()->getName() == 'calender.index' ? ' active' : '' }}">
-                            <a href="{{ route('calender.google.calendar', $currentWorkspace->slug) }}" class="dash-link ">
+                            <a href="{{ route('calender.google.calendar', $currentWorkspace->slug) }}"
+                               class="dash-link ">
                                 <span class="dash-micon"><i data-feather="calendar"></i></span>
                                 <span class="dash-mtext">{{ __('Calendar') }}</span>
                             </a>
@@ -188,7 +196,7 @@
                             </li>
                         @endif
 
-                        @elseauth
+                    @elseauth
 
                         <li
                             class="dash-item {{ Request::route()->getName() == 'client.projects.index' || Request::segment(3) == 'projects' ? ' active' : '' }}">
@@ -225,7 +233,7 @@
                         <li
                             class="dash-item {{ Request::route()->getName() == 'client.project_report.index' || Request::segment(3) == 'project_report' ? ' active' : '' }}">
                             <a href="{{ route('client.project_report.index', $currentWorkspace->slug) }}"
-                                class="dash-link ">
+                               class="dash-link ">
                                 <span class="dash-micon"><i class="ti ti-chart-line"></i></span>
                                 <span class="dash-mtext">{{ __('Project Report') }}</span>
                             </a>
@@ -242,7 +250,7 @@
                         <li
                             class="dash-item {{ Request::route()->getName() == 'client.zoom-meeting.index' || Request::route()->getName() == 'zoommeetings.Calender' ? ' active' : '' }}">
                             <a href="{{ route('client.zoom-meeting.index', $currentWorkspace->slug) }}"
-                                class="dash-link ">
+                               class="dash-link ">
                                 <span class="dash-micon"><i data-feather="video"></i></span>
                                 <span class="dash-mtext">{{ __('Zoom Meeting') }}</span>
                             </a>
@@ -267,51 +275,51 @@
                                 <span class="dash-mtext">{{ __('Zoom Meeting') }}</span>
                             </a>
                         </li>
-                    @endauth
-                @endif
+            @endauth
+            @endif
 
-                @if (Auth::user()->type == 'admin')
-                    <li
-                        class="dash-item {{ Request::route()->getName() == 'email_template.index' || Request::route()->getName() == 'email_template.show' || Request::segment(1) == 'email_template_lang' ? ' active' : '' }}">
-                        <a class="dash-link" href="{{ route('email_template.index') }}">
-                            <span class="dash-micon"><i class="ti ti-mail"></i></span>
-                            <span class="dash-mtext">{{ __('Email Templates') }}</span>
-                        </a>
-                    </li>
+            @if (Auth::user()->type == 'admin')
+               <li
+                class="dash-item {{ Request::route()->getName() == 'email_template.index' || Request::route()->getName() == 'email_template.show' || Request::segment(1) == 'email_template_lang' ? ' active' : '' }}">
+                <a class="dash-link" href="{{ route('email_template.index') }}">
+                    <span class="dash-micon"><i class="ti ti-mail"></i></span>
+                    <span class="dash-mtext">{{ __('Email Templates') }}</span>
+                </a>
+                                  </li>
 
-                    @include('landingpage::menu.landingpage')
+                                  @include('landingpage::menu.landingpage')
 
-                    <li class="dash-item {{ Request::route()->getName() == 'settings.index' ? ' active' : '' }}">
-                        <a href="{{ route('settings.index') }}" class="dash-link "><span class="dash-micon">
-                                <i data-feather="settings"></i></span>
-                            <span class="dash-mtext">{{ __('Settings') }}</span>
-                        </a>
-                    </li>
-                @endif
+                                  <li class="dash-item {{ Request::route()->getName() == 'settings.index' ? ' active' : '' }}">
+                <a href="{{ route('settings.index') }}" class="dash-link "><span class="dash-micon">
+                        <i data-feather="settings"></i></span>
+                    <span class="dash-mtext">{{ __('Settings') }}</span>
+                </a>
+                                  </li>
+            @endif
 
-                @if (isset($currentWorkspace) &&
-                        $currentWorkspace &&
-                        $currentWorkspace->creater->id == Auth::user()->id &&
-                        Auth::user()->getGuard() != 'client')
-                    <li
-                        class="dash-item {{ Request::route()->getName() == 'notification-templates.index' || Request::route()->getName() == 'notification-templates.show' ? ' active' : '' }}">
-                        <a href="{{ route('notification-templates.index', $currentWorkspace->slug) }}"
-                            class="dash-link ">
-                            <span class="dash-micon"><i class="ti ti-notification"></i></span>
-                            <span class="dash-mtext">{{ __('Notification Template') }}</span>
-                        </a>
-                    </li>
+            @if (isset($currentWorkspace) &&
+                    $currentWorkspace &&
+                    $currentWorkspace->creater->id == Auth::user()->id &&
+                    Auth::user()->getGuard() != 'client')
+                                  <li
+                class="dash-item {{ Request::route()->getName() == 'notification-templates.index' || Request::route()->getName() == 'notification-templates.show' ? ' active' : '' }}">
+                <a href="{{ route('notification-templates.index', $currentWorkspace->slug) }}"
+                    class="dash-link ">
+                    <span class="dash-micon"><i class="ti ti-notification"></i></span>
+                    <span class="dash-mtext">{{ __('Notification Template') }}</span>
+                </a>
+                                  </li>
 
-                    <li class="dash-item {{ Request::route()->getName() == 'workspace.settings' ? ' active' : '' }}">
-                        <a href="{{ route('workspace.settings', $currentWorkspace->slug) }}" class="dash-link ">
-                            <span class="dash-micon"><i data-feather="settings"></i></span>
-                            <span class="dash-mtext">{{ __('Settings') }}</span>
-                        </a>
-                    </li>
-                @endif
+                                  <li class="dash-item {{ Request::route()->getName() == 'workspace.settings' ? ' active' : '' }}">
+                <a href="{{ route('workspace.settings', $currentWorkspace->slug) }}" class="dash-link ">
+                    <span class="dash-micon"><i data-feather="settings"></i></span>
+                    <span class="dash-mtext">{{ __('Settings') }}</span>
+                </a>
+                                  </li>
+            @endif
 
-                @if (Auth::user()->type == 'admin')
-                @endif
+            @if (Auth::user()->type == 'admin')
+            @endif
         </div>
     </div>
 </nav>

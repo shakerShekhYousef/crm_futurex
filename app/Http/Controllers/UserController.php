@@ -813,7 +813,7 @@ class UserController extends Controller
             );
 
             try {
-                $setting = Utility::fetchAdminPaymentSetting();
+                $setting = Utility::fetchAdminPaymentSettings();
                 $uArr = [
                     'user_name' => $registerUsers->name,
                     // 'app_name' => env('APP_NAME'),

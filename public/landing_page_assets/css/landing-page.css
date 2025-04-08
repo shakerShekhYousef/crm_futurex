@@ -21,14 +21,22 @@ a:focus, a:hover {
     outline: none;
     text-decoration: none;
 }
-
+.card-body h3{
+    color: #ff6500 !important;
+}
+.card-body p{
+    color: #ffffff !important;
+}
 .bg-dark {
-    background: #002332 !important;
+    background: #ff6500 !important;
+    color: #ffffff;
+}
+.main-header .announcement p{
     color: #ffffff;
 }
 
 .bg-dark p {
-    color: #ffffff;
+    color: #000000;
 }
 
 .bg-dark .title h2 {
@@ -51,6 +59,7 @@ a:focus, a:hover {
 
 .container {
     max-width: 1540px;
+    background-color: aliceblue;
 }
 
 .main-header {
@@ -63,12 +72,28 @@ a:focus, a:hover {
 }
 
 .main-header .navbar {
-    padding: 15px 0;
+    padding: 0px 0;
 }
 
 .main-header .navbar .navbar-nav .nav-item .nav-link {
-    color: #002332;
+    color: #000000;
     font-weight: 500;
+}
+
+.main-banner h1{
+    color: #ff6500;
+}
+.btn-custom-landing{
+    border: solid aliceblue;
+    color: aliceblue;
+}
+.btn-custom-landing:hover{
+    border: solid #ff6500;
+    color: #0b192c;
+    background-color: #ff6500;
+}
+.main-banner h6{
+    color: aliceblue;
 }
 
 .main-header .navbar .btn {
@@ -174,6 +199,7 @@ a:focus, a:hover {
 }
 
 .main-banner .container-offset {
+    margin-top: 86px;
     position: relative;
     margin-left: calc((100% - 1540px) / 2);
     padding-left: 15px;

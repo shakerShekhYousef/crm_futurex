@@ -242,7 +242,7 @@
                         <div class="navbar-brand">
                             <a class="" href="#">
                                 <img src="{{ asset($logo . $company_logo . '?v=' . time()) }}" class=""
-                                    alt="logo">
+                                    alt="logo" width="100px">
                             </a>
                         </div>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

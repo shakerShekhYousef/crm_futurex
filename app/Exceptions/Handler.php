@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class Handler extends ExceptionHandler
 {
@@ -47,4 +49,26 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $e)
+{
+    if ($request->ajax() || $request->wantsJson()) {
+        return response()->json([
+            'message' => $e->getMessage(),
+            'errors' => method_exists($e, 'errors') ? $e->errors() : []
+        ], $this->getStatusCode($e));
+    }
+
+    return parent::render($request, $e);
+}
+protected function getStatusCode(Throwable $e): int
+{
+    if (method_exists($e, 'getStatusCode')) {
+        return $e->getStatusCode();
+    }
+
+    return $e instanceof ValidationException 
+        ? Response::HTTP_UNPROCESSABLE_ENTITY
+        : Response::HTTP_INTERNAL_SERVER_ERROR;
+}
 }

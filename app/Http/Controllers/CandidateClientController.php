@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 
 
+
 class CandidateClientController extends Controller
 {
 

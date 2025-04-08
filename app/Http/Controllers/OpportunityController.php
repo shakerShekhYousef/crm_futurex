@@ -15,7 +15,7 @@ class OpportunityController extends Controller
     {
         $currentWorkspace = Utility::getWorkspaceBySlug($slug);
         $candidateclients = CandidateClient::with('opportunities')->where('workspace',$currentWorkspace->id)->get();
-       
+
         return view('opportunities.index', [
             'currentWorkspace' => $currentWorkspace,
             'candidateclients' => $candidateclients
@@ -25,10 +25,11 @@ class OpportunityController extends Controller
     public function show($slug, $candidateClientid)
     {
         $currentWorkspace = Utility::getWorkspaceBySlug($slug);
-        $all_opportunities = Opportunity::where([
-            ['candidate_client_id', $candidateClientid],
-            ['workspace',$currentWorkspace->id]
-            ])->get();
+
+//        if ($currentWorkspace->creater->id !== \Auth::user()->id) {
+//            return redirect()->route('home');
+//        }
+        $all_opportunities = Opportunity::where('candidate_client_id', $candidateClientid)->get();
 
         return response()->json($all_opportunities);
 

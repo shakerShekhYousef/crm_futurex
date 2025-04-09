@@ -6,6 +6,7 @@ use App\Models\Utility;
 use Illuminate\Http\Request;
 use App\Models\CandidateClient;
 use App\Models\Opportunity;
+use Yajra\DataTables\Facades\DataTables;
 
 class OpportunityController extends Controller
 {
@@ -14,12 +15,42 @@ class OpportunityController extends Controller
     public function index($slug)
     {
         $currentWorkspace = Utility::getWorkspaceBySlug($slug);
-        $candidateclients = CandidateClient::with('opportunities')->where('workspace',$currentWorkspace->id)->get();
+        $candidateclients = CandidateClient::with('opportunities')->where('workspace', $currentWorkspace->id)->get();
 
         return view('opportunities.index', [
             'currentWorkspace' => $currentWorkspace,
             'candidateclients' => $candidateclients
         ]);
+    }
+
+    public function datatable($workspace)
+    {
+        $currentWorkspace = Utility::getWorkspaceBySlug($workspace);
+        $query = CandidateClient::query()->where('workspace', $currentWorkspace->id);
+
+        return DataTables::of($query)
+            ->filter(function ($query) {
+                $request = request();
+
+                if ($request->has('name') && !empty($request->name)) {
+                    $query->where('name', 'like', '%'.$request->name.'%');
+                }
+                if ($request->has('company_name') && !empty($request->company_name)) {
+                    $query->where('company_name', 'like', '%'.$request->company_name.'%');
+                }
+                if ($request->has('email') && !empty($request->email)) {
+                    $query->where('email', 'like', '%'.$request->email.'%');
+                }
+                if ($request->has('phone') && !empty($request->phone)) {
+                    $query->where('phone', 'like', '%'.$request->phone.'%');
+                }
+            })
+            ->addColumn('actions', function($client) {
+                return ''; // Will be rendered in DataTables render function
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+
     }
 
     public function show($slug, $candidateClientid)
@@ -77,7 +108,8 @@ class OpportunityController extends Controller
 
         return redirect()->back()->with('success', __('Opportunity added Successfully!'));
     }
-    public function update(Request $request,$slug)
+
+    public function update(Request $request, $slug)
     {
         $currentWorkspace = Utility::getWorkspaceBySlug($slug);
         $validator = \Validator::make($request->all(), [
@@ -123,11 +155,10 @@ class OpportunityController extends Controller
         // Ensure the file exists in public/example_files directory
         $filePath = public_path('example_files/opportunity_example.xlsx');
 
-        if(!file_exists($filePath)) {
+        if (!file_exists($filePath)) {
             abort(404);
         }
 
         return response()->download($filePath, 'opportunity_template.xlsx');
     }
-
 }

@@ -558,6 +558,7 @@ Route::group(['middleware' => ['verified']], function () {
 
     //opportunities
     Route::get('/{slug}/opportunities',[OpportunityController::class,'index'])->name('opportunities.index')->middleware(['auth', 'XSS']);
+    Route::get('/{slug}/opportunities/search',[OpportunityController::class,'datatable'])->name('opportunities.datatable')->middleware(['auth', 'XSS']);
     Route::post('/{slug}/opportunities/store',[OpportunityController::class,'store'])->name('opportunities.store')->middleware(['auth', 'XSS']);
     Route::post('/{slug}/opportunities/update',[OpportunityController::class,'update'])->name('opportunities.update')->middleware(['auth', 'XSS']);
     Route::get('/{slug}/opportunities/{id}',[OpportunityController::class,'show'])->name('opportunities.show')->middleware(['auth', 'XSS']);

@@ -15,6 +15,58 @@
             max-height: 30px !important;
         }
     </style>
+    <style type="text/css">
+        .hight_img {
+            max-width: 30px !important;
+            max-height: 30px !important;
+        }
+
+        /* Horizontal Scroll Styles */
+        .kanban-wrapper {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .kanban-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%!important;
+        }
+
+        .scroll-button.left {
+            left: 9px;
+        }
+
+        .scroll-button.right {
+            right: -20px;
+        }
+
+        .kanban-column {
+            min-width: 300px;
+            width: 300px;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .kanban-container {
+            position: relative;
+            padding: 0 2rem;
+        }
+    </style>
 @endpush
 
 @section('page-title')
@@ -60,6 +112,13 @@
         @if ($project && $currentWorkspace)
             <div class="row">
                 <div class="col-sm-12">
+                    <!-- Scroll Buttons -->
+                    <button class="scroll-button left btn btn-primary shadow d-none d-md-flex">
+                        <i class="ti ti-chevron-left"></i>
+                    </button>
+                    <button class="scroll-button right btn btn-primary shadow d-none d-md-flex">
+                        <i class="ti ti-chevron-right"></i>
+                    </button>
                     <div class="row kanban-wrapper horizontal-scroll-cards" data-toggle="dragula"
                         data-containers='{{ json_encode($statusClass) }}'>
                         @foreach ($stages as $stage)
@@ -605,6 +664,39 @@
                         }
                     });
                 }
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const kanbanWrapper = document.querySelector('.kanban-wrapper');
+                const scrollLeftBtn = document.querySelector('.scroll-button.left');
+                const scrollRightBtn = document.querySelector('.scroll-button.right');
+
+                // Button click handlers
+                scrollLeftBtn.addEventListener('click', () => {
+                    kanbanWrapper.scrollBy({
+                        left: -kanbanWrapper.offsetWidth * 0.8,
+                        behavior: 'smooth'
+                    });
+                });
+
+                scrollRightBtn.addEventListener('click', () => {
+                    kanbanWrapper.scrollBy({
+                        left: kanbanWrapper.offsetWidth * 0.8,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Show/hide buttons based on scroll position
+                kanbanWrapper.addEventListener('scroll', () => {
+                    scrollLeftBtn.style.display = kanbanWrapper.scrollLeft > 0 ? 'flex' : 'none';
+                    scrollRightBtn.style.display =
+                        kanbanWrapper.scrollLeft < (kanbanWrapper.scrollWidth - kanbanWrapper.clientWidth) ?
+                            'flex' : 'none';
+                });
+
+                // Initial button state
+                kanbanWrapper.dispatchEvent(new Event('scroll'));
             });
         </script>
     @endpush
